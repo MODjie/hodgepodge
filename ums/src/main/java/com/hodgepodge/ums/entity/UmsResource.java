@@ -8,14 +8,14 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 用户表(UmsUser)实体类
+ * 资源表(UmsResource)实体类
  *
  * @author makejava
- * @since 2021-12-18 11:04:24
+ * @since 2021-12-18 17:17:17
  */
 @Data
-@TableName("ums_user")
-public class UmsUser {
+@TableName("ums_resource")
+public class UmsResource {
 
     /**
      * 主键
@@ -24,24 +24,19 @@ public class UmsUser {
     private Long id;
 
     /**
-     * 用户名
+     * 菜单名称
      */
-    private String username;
+    private String name;
 
     /**
-     * 密码
+     * 上级资源ID
      */
-    private String password;
+    private Long parentId;
 
     /**
      * 是否删除
      */
-    private Boolean isDelete;
-
-    /**
-     * 是否可用
-     */
-    private Boolean isEnabled;
+    private Integer isDelete;
 
     /**
      * 创建时间

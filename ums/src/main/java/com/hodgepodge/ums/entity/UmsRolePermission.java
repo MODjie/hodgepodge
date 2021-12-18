@@ -8,14 +8,14 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 用户表(UmsUser)实体类
+ * 角色权限关系表(UmsRolePermission)实体类
  *
  * @author makejava
- * @since 2021-12-18 11:04:24
+ * @since 2021-12-18 17:17:17
  */
 @Data
-@TableName("ums_user")
-public class UmsUser {
+@TableName("ums_role_permission")
+public class UmsRolePermission {
 
     /**
      * 主键
@@ -24,24 +24,19 @@ public class UmsUser {
     private Long id;
 
     /**
-     * 用户名
+     * 角色ID
      */
-    private String username;
+    private Long roleId;
 
     /**
-     * 密码
+     * 用户ID
      */
-    private String password;
+    private Long permissionId;
 
     /**
      * 是否删除
      */
-    private Boolean isDelete;
-
-    /**
-     * 是否可用
-     */
-    private Boolean isEnabled;
+    private Integer isDelete;
 
     /**
      * 创建时间

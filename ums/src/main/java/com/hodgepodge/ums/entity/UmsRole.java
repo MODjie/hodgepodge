@@ -8,14 +8,14 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 用户表(UmsUser)实体类
+ * 角色表(UmsRole)实体类
  *
  * @author makejava
- * @since 2021-12-18 11:04:24
+ * @since 2021-12-18 17:17:17
  */
 @Data
-@TableName("ums_user")
-public class UmsUser {
+@TableName("ums_role")
+public class UmsRole {
 
     /**
      * 主键
@@ -24,24 +24,14 @@ public class UmsUser {
     private Long id;
 
     /**
-     * 用户名
+     * 角色名
      */
-    private String username;
-
-    /**
-     * 密码
-     */
-    private String password;
+    private String name;
 
     /**
      * 是否删除
      */
-    private Boolean isDelete;
-
-    /**
-     * 是否可用
-     */
-    private Boolean isEnabled;
+    private Integer isDelete;
 
     /**
      * 创建时间
