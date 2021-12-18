@@ -3,7 +3,7 @@ nacos:
   namespace: 3c846ab1-b76b-423b-91c6-6dc5d5954b11
 spring:
   application:
-    name: system
+    name: ums
   cloud:
     nacos:
       config:
