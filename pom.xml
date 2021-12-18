@@ -10,6 +10,7 @@
     <modules>
         <module>gateway</module>
         <module>ums</module>
+        <module>order</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -99,14 +100,14 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <finalName>code-generator</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+<!--    <build>-->
+<!--        <finalName>code-generator</finalName>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>

@@ -1,5 +1,5 @@
 
-package com.hodgepodge.ums.config;
+package com.hodgepodge.order.config;
 
 import com.github.xiaoymin.knife4j.core.util.CollectionUtils;
 import org.springframework.context.annotation.Bean;
@@ -24,13 +24,13 @@ import java.util.List;
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfiguration {
 
-    @Bean(value = "umsApi")
+    @Bean(value = "orderApi")
     @Order(value = 1)
     public Docket groupRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(groupApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.hodgepodge.ums.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.hodgepodge.order.controller"))
                 .paths(PathSelectors.any())
                 .build();
 //                .securityContexts(CollectionUtils.newArrayList(securityContext(),securityContext1())).securitySchemes(CollectionUtils.<SecurityScheme>newArrayList(apiKey(),apiKey1()));
