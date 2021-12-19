@@ -22,7 +22,7 @@ import java.util.List;
 @Configuration
 @EnableSwagger2WebMvc
 @Import(BeanValidatorPluginsConfiguration.class)
-public class SwaggerConfiguration {
+public class SwaggerConfig {
 
     @Bean(value = "umsApi")
     @Order(value = 1)
