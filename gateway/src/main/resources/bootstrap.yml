@@ -1,5 +1,5 @@
 nacos:
-  server-addr: http://192.168.142.128:8848
+  server-addr: http://121.37.25.151:8848
   namespace: 3c846ab1-b76b-423b-91c6-6dc5d5954b11
 spring:
   application:
