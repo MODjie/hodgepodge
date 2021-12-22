@@ -1,15 +1,12 @@
 package com.hodgepodge.ums.service;
 
-import com.hodgepodge.ums.entity.UmsUser;
+import com.hodgepodge.ums.entity.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,12 +26,12 @@ import java.util.List;
 public class CustomUserDetailsService  implements UserDetailsService {
 
     @Autowired
-    private UmsUserService umsUserService;
+    private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UmsUser user = umsUserService.lambdaQuery().eq(UmsUser::getUsername, username).one();
+        UserDO user = userService.lambdaQuery().eq(UserDO::getUsername, username).one();
         if (user == null){
             throw new UsernameNotFoundException("未找到用户："+username);
         }

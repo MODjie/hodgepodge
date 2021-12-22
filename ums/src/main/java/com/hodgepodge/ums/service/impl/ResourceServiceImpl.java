@@ -1,0 +1,18 @@
+package com.hodgepodge.ums.service.impl;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hodgepodge.ums.entity.ResourceDO;
+import com.hodgepodge.ums.mapper.ResourceMapper;
+import com.hodgepodge.ums.service.ResourceService;
+import org.springframework.stereotype.Service;
+
+/**
+ * 资源表服务接口实现
+ *
+ * @author makejava
+ * @since 2021-12-22 13:07:49
+ */
+@Service
+public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, ResourceDO> implements ResourceService {
+
+}
