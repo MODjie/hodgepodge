@@ -1,5 +1,5 @@
 
-package com.hodgepodge.ums.config;
+package com.hodgepodge.ums.auth.config;
 
 import com.github.xiaoymin.knife4j.core.util.CollectionUtils;
 import org.springframework.context.annotation.Bean;

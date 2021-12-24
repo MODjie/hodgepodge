@@ -1,4 +1,4 @@
-package com.hodgepodge.ums.config;
+package com.hodgepodge.ums.auth.config;
 
 import com.hodgepodge.ums.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
@@ -42,11 +42,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/oauth/**","/login/**","logout/**")
+                .antMatchers("/oauth/**","/system/**","logout/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

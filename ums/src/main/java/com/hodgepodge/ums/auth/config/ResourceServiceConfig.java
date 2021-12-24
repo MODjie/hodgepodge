@@ -1,4 +1,4 @@
-package com.hodgepodge.ums.config;
+package com.hodgepodge.ums.auth.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

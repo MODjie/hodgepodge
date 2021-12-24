@@ -1,4 +1,4 @@
-package com.hodgepodge.ums.config;
+package com.hodgepodge.ums.auth.config;
 
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;
