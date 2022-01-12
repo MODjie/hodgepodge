@@ -3,7 +3,7 @@ nacos:
   namespace: hodgepodge-dev
 spring:
   application:
-    name: ums
+    name: gateway-api
   cloud:
     nacos:
       config:

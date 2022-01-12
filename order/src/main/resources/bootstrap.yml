@@ -1,6 +1,6 @@
 nacos:
-  server-addr: http://121.37.25.151:8848
-  namespace: 3c846ab1-b76b-423b-91c6-6dc5d5954b11
+  server-addr: http://124.71.32.209:8848
+  namespace: hodgepodge-dev
 spring:
   application:
     name: order
