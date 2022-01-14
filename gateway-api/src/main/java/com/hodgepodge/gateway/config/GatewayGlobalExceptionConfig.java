@@ -1,9 +1,11 @@
 package com.hodgepodge.gateway.config;
 
 import com.hodgepodge.gateway.exception.GatewayGlobalExceptionHandler;
+import com.hodgepodge.gateway.exception.GatewayGlobalExceptionHandlerAdapter;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.boot.web.reactive.error.ErrorAttributes;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.context.ApplicationContext;
@@ -34,19 +36,31 @@ public class GatewayGlobalExceptionConfig {
 
     @Bean
     @Primary
-    @Order(Ordered.HIGHEST_PRECEDENCE)
     public ErrorWebExceptionHandler gatewayGlobalExceptionHandler(
             ErrorAttributes errorAttributes,
-            ResourceProperties resourceProperties,
             ServerProperties serverProperties,
             ApplicationContext applicationContext,
             ServerCodecConfigurer serverCodecConfigurer,
-            ObjectProvider<ViewResolver> viewResolversProvider
+            WebProperties.Resources resources,
+            ObjectProvider<ViewResolver> viewResolversProvider,
+            GatewayGlobalExceptionHandlerAdapter adapter
             ) {
-        GatewayGlobalExceptionHandler handler = new GatewayGlobalExceptionHandler(errorAttributes, resourceProperties, serverProperties.getError(), applicationContext);
+        GatewayGlobalExceptionHandler handler = new GatewayGlobalExceptionHandler(adapter,errorAttributes, resources, serverProperties.getError(), applicationContext);
         handler.setMessageWriters(serverCodecConfigurer.getWriters());
         handler.setViewResolvers(viewResolversProvider.orderedStream().collect(Collectors.toList()));
         handler.setMessageReaders(serverCodecConfigurer.getReaders());
         return handler;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public WebProperties.Resources resources(){
+        return new WebProperties.Resources();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public GatewayGlobalExceptionHandlerAdapter adapter(){
+        return new GatewayGlobalExceptionHandlerAdapter();
     }
 }

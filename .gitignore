@@ -1,2 +1,4 @@
 /ums/target/
 /common/target/
+/gateway-api/target/
+/order/target/

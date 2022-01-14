@@ -19,9 +19,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 import java.util.List;
 
 
-@Configuration
-@EnableSwagger2WebMvc
-@Import(BeanValidatorPluginsConfiguration.class)
+//@Configuration
+//@EnableSwagger2WebMvc
+//@Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfig {
 
     @Bean(value = "umsApi")

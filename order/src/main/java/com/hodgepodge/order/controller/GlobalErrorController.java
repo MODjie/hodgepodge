@@ -18,11 +18,7 @@ import org.springframework.stereotype.Controller;
  * @date 2022年01月14日
  * @since 1.8
  */
-@Controller
+//@Controller
 public class GlobalErrorController implements ErrorController {
 
-    @Override
-    public String getErrorPath() {
-        return null;
-    }
 }
