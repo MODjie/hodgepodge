@@ -37,7 +37,7 @@
         <mybatis-plus-generator.version>3.5.1</mybatis-plus-generator.version>
         <knife4j.version>2.0.8</knife4j.version>
         <hutool.version>5.7.17</hutool.version>
-        <spring-cloud-oauth2.version>2.2.5.RELEASE</spring-cloud-oauth2.version>
+        <spring-cloud-security.version>2.2.5.RELEASE</spring-cloud-security.version>
     </properties>
 
     <dependencyManagement>
