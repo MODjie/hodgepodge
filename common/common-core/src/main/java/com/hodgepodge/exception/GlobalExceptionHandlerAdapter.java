@@ -1,6 +1,5 @@
-package com.hodgepodge.order.exception;
+package com.hodgepodge.exception;
 
-import com.hodgepodge.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Value;

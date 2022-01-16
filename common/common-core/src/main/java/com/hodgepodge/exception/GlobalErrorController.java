@@ -1,7 +1,5 @@
-package com.hodgepodge.order.exception;
+package com.hodgepodge.exception;
 
-import com.hodgepodge.exception.ErrorEntity;
-import com.hodgepodge.exception.Return;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpHeaders;

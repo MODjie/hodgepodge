@@ -38,8 +38,14 @@
         </dependency>
         <dependency>
             <groupId>com.hodgepodge</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>common-core-api</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

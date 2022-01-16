@@ -1,6 +1,5 @@
-package com.hodgepodge.order.exception;
+package com.hodgepodge.exception;
 
-import com.hodgepodge.exception.ErrorEntity;
 import org.springframework.http.HttpStatus;
 
 /**

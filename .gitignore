@@ -2,3 +2,5 @@
 /common/target/
 /gateway-api/target/
 /order/target/
+/common/common-core/target/
+/common/common-core-api/target/

@@ -1,4 +1,4 @@
-package com.hodgepodge.order.exception;
+package com.hodgepodge.exception;
 
 import java.util.*;
 import java.util.stream.Collectors;

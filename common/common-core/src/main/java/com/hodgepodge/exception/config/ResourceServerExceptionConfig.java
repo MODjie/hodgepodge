@@ -1,8 +1,8 @@
-package com.hodgepodge.order.config;
+package com.hodgepodge.exception.config;
 
-import com.hodgepodge.order.exception.GlobalErrorController;
-import com.hodgepodge.order.exception.GlobalExceptionHandler;
-import com.hodgepodge.order.exception.GlobalExceptionHandlerAdapter;
+import com.hodgepodge.exception.GlobalErrorController;
+import com.hodgepodge.exception.GlobalExceptionHandler;
+import com.hodgepodge.exception.GlobalExceptionHandlerAdapter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

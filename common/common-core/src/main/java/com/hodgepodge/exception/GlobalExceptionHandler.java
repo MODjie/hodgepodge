@@ -1,4 +1,4 @@
-package com.hodgepodge.order.exception;
+package com.hodgepodge.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

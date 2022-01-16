@@ -1,7 +1,5 @@
-package com.hodgepodge.order.exception;
+package com.hodgepodge.exception;
 
-import com.hodgepodge.exception.ErrorEntity;
-import com.hodgepodge.exception.ServiceRuntimeException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.http.HttpStatus;
@@ -61,7 +59,7 @@ public class ApiException extends ServiceRuntimeException {
      * </p>
      *
      * @param responseError
-     * @return com.hodgepodge.order.exception.ApiException
+     * @return com.hodgepodge.exception.ApiException
      * @author 刘小杰
      * @date 2022年01月15日
      * @since 1.8
