@@ -30,4 +30,8 @@ public class UserController {
         return authentication.getPrincipal();
     }
 
+    @GetMapping("/hello")
+    public String hello(){
+        return "hello security";
+    }
 }
