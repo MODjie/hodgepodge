@@ -3,6 +3,7 @@ package com.hodgepodge.gateway.config;
 import com.github.xiaoymin.knife4j.core.util.StrUtil;
 import com.hodgepodge.constant.SecurityConstants;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -16,6 +17,7 @@ import org.springframework.util.PathMatcher;
 import org.springframework.util.StringUtils;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +35,14 @@ import java.util.List;
  */
 @Slf4j
 @Component
+@EnableConfigurationProperties(CustomGatewayProperties.class)
 public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
-//    private RedisTemplate redisTemplate;
+    /**
+     * 自定义网关的配置
+     */
+    @Resource
+    private CustomGatewayProperties customGatewayProperties;
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
@@ -47,7 +54,11 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         if (request.getMethod() == HttpMethod.OPTIONS) {
             return Mono.just(new AuthorizationDecision(true));
         }
-
+        //认证的请求直接放行
+        boolean isPass = customGatewayProperties.getWhiteList().stream().anyMatch(whitePath -> pathMatcher.match(whitePath, path));
+        if (isPass){
+            return Mono.just(new AuthorizationDecision(true));
+        }
         // 2. token为空拒绝访问
         String token = request.getHeaders().getFirst(SecurityConstants.TOKEN);
         token = StringUtils.hasText(token)?token:request.getHeaders().getFirst(SecurityConstants.AUTHORIZATION);

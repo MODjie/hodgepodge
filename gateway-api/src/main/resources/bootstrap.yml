@@ -13,8 +13,3 @@ spring:
       discovery:
         server-addr: ${nacos.server-addr}
         namespace: ${nacos.namespace}
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8001
