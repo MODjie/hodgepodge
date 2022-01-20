@@ -1,9 +1,12 @@
 package com.hodgepodge.gateway.config;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.authentication.AuthenticationTrustResolver;
+import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -29,12 +32,24 @@ public class ResourceServerConfig {
     @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
     private String issuerUri;
 
+    private AuthorizationManager authorizationManager;
+
+    private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+
+    public ResourceServerConfig(AuthorizationManager authorizationManager,CustomAuthenticationEntryPoint customAuthenticationEntryPoint) {
+        this.authorizationManager = authorizationManager;
+        this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
+    }
+
     @Bean
     SecurityWebFilterChain resourceServerSecurityFilterChain(ServerHttpSecurity http) {
         http
                 .authorizeExchange(exchanges -> exchanges
-                        .anyExchange().authenticated()
+                        .anyExchange()
+                        .access(authorizationManager)
+
                 )
+                .exceptionHandling(exceptionHandlingSpec -> exceptionHandlingSpec.authenticationEntryPoint(customAuthenticationEntryPoint))
                 .oauth2ResourceServer(ServerHttpSecurity.OAuth2ResourceServerSpec::jwt);
         return http.build();
     }
