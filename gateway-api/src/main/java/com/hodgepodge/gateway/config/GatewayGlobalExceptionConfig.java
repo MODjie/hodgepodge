@@ -1,7 +1,9 @@
 package com.hodgepodge.gateway.config;
 
+import com.hodgepodge.gateway.exception.GatewayErrorAttributes;
 import com.hodgepodge.gateway.exception.GatewayGlobalExceptionHandler;
 import com.hodgepodge.gateway.exception.GatewayGlobalExceptionHandlerAdapter;
+import javassist.bytecode.ExceptionsAttribute;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -19,7 +21,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * Title: GatewayGlobalExceptionConfig
+ * Title: 网关全局异常配置
  * </p>
  * <p>
  * Description:
@@ -60,6 +62,11 @@ public class GatewayGlobalExceptionConfig {
     @ConditionalOnMissingBean
     public GatewayGlobalExceptionHandlerAdapter adapter(){
         return new GatewayGlobalExceptionHandlerAdapter();
+    }
+
+    @Bean
+    public ErrorAttributes exceptionsAttribute(){
+        return new GatewayErrorAttributes();
     }
 
 }
