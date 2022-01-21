@@ -44,6 +44,7 @@ public class ResourceServerConfig {
 
                 )
                 .exceptionHandling(exceptionHandlingSpec -> exceptionHandlingSpec.authenticationEntryPoint(customAuthenticationEntryPoint))
+                .csrf().disable()
                 .oauth2ResourceServer(ServerHttpSecurity.OAuth2ResourceServerSpec::jwt);
         return http.build();
     }

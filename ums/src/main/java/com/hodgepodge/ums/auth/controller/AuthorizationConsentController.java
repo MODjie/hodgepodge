@@ -41,7 +41,7 @@ import java.util.*;
  * @date 2022年01月18日
  * @since 1.8
  */
-@Controller
+//@Controller
 public class AuthorizationConsentController {
 	private final RegisteredClientRepository registeredClientRepository;
 	private final OAuth2AuthorizationConsentService authorizationConsentService;
@@ -53,7 +53,7 @@ public class AuthorizationConsentController {
 	}
 
 	@GetMapping(value = "/oauth2/consent")
-	public String consent(Principal principal, Model model,
+	public Map<String,Object> consent(Principal principal,
 			@RequestParam(OAuth2ParameterNames.CLIENT_ID) String clientId,
 			@RequestParam(OAuth2ParameterNames.SCOPE) String scope,
 			@RequestParam(OAuth2ParameterNames.STATE) String state) {
@@ -77,14 +77,14 @@ public class AuthorizationConsentController {
 				scopesToApprove.add(requestedScope);
 			}
 		}
+		HashMap<String,Object> hashMap = new HashMap<>();
+		hashMap.put("clientId", clientId);
+		hashMap.put("state", state);
+		hashMap.put("scopes", withDescription(scopesToApprove));
+		hashMap.put("previouslyApprovedScopes", withDescription(previouslyApprovedScopes));
+		hashMap.put("principalName", principal.getName());
 
-		model.addAttribute("clientId", clientId);
-		model.addAttribute("state", state);
-		model.addAttribute("scopes", withDescription(scopesToApprove));
-		model.addAttribute("previouslyApprovedScopes", withDescription(previouslyApprovedScopes));
-		model.addAttribute("principalName", principal.getName());
-
-		return "consent";
+		return hashMap;
 	}
 
 	private static Set<ScopeWithDescription> withDescription(Set<String> scopes) {

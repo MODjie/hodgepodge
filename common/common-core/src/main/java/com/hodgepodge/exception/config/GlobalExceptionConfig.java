@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * <p>
- * Title: 资源服务器异常配置类
+ * Title: 全局异常配置类
  * </p>
  * <p>
  * Description:
@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(ErrorMvcAutoConfiguration.class)
 @ConditionalOnProperty(value = "resource-server.use-restful-error-handler", matchIfMissing = true)
-public class ResourceServerExceptionConfig {
+public class GlobalExceptionConfig {
 
     @Bean
     @ConditionalOnMissingBean

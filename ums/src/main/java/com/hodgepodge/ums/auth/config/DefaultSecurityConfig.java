@@ -1,6 +1,7 @@
 package com.hodgepodge.ums.auth.config;
 
 import com.hodgepodge.ums.service.CustomUserDetailsService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,7 +36,7 @@ public class DefaultSecurityConfig {
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests.anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults());
+                .formLogin(Customizer.withDefaults());
         return http.build();
     }
 
@@ -44,6 +45,7 @@ public class DefaultSecurityConfig {
         return new CustomUserDetailsService();
     }
 
+    @ConditionalOnMissingBean
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new Md5Encoder();

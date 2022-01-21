@@ -1,6 +1,6 @@
 package com.hodgepodge.ums.config;
 
-import com.hodgepodge.exception.config.ResourceServerExceptionConfig;
+import com.hodgepodge.exception.config.GlobalExceptionConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Import;
  * @since 1.8
  */
 @Configuration
-@Import(ResourceServerExceptionConfig.class)
+@Import(GlobalExceptionConfig.class)
 public class ExceptionConfig {
 
 
