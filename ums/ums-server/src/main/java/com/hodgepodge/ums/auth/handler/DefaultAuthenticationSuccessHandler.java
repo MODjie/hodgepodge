@@ -69,8 +69,8 @@ public class DefaultAuthenticationSuccessHandler implements AuthenticationSucces
     private TokenVO createToken(UserDetailsVO details) {
         Long userId = details.getUserId();
         String username = details.getUsername();
-//        Long expiredTime = System.currentTimeMillis() + 1000 * 60 * 60 * 24;
-        Long effectiveTime = Long.valueOf(1000*25);
+        //token过期时间默认为一天
+        Long effectiveTime = Long.valueOf(1000 * 60 * 60 * 24);
         Long expiredTime = System.currentTimeMillis() + effectiveTime;
         Map<String, Object> map = new HashMap<String, Object>(10) {
             private static final long serialVersionUID = 1L;
