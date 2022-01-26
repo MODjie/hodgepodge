@@ -29,6 +29,8 @@ public class TokenVO {
     private String token;
 
     @ApiModelProperty("过期时间")
-    private Date expiredTime;
+    private Long expiredTime;
 
+    @ApiModelProperty("有效时间")
+    private Long effectiveTime;
 }

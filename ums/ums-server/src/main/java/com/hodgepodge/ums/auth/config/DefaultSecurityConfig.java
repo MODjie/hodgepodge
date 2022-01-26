@@ -1,10 +1,11 @@
 package com.hodgepodge.ums.auth.config;
 
-import com.hodgepodge.ums.auth.filter.DefaultAuthenticationFilter;
+import com.hodgepodge.ums.auth.entrypoint.DefaultAuthenticationEntryPoint;
+import com.hodgepodge.ums.auth.handler.DefaultAuthenticationSuccessHandler;
 import com.hodgepodge.ums.auth.service.CustomUserDetailsService;
+import com.hodgepodge.ums.auth.util.Md5Encoder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,19 +27,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class DefaultSecurityConfig {
 
-    private final String DEFAULT_FILTER_PROCESS_URL = "/auth/login";
-
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(authorizeRequests ->
                                 authorizeRequests
-                                        .antMatchers("/auth/**").permitAll()
-                                        .anyRequest().authenticated()
+                                        .anyRequest().permitAll()
                 )
-                .formLogin(Customizer.withDefaults())
-                .exceptionHandling(exception->exception.authenticationEntryPoint(this.defaultAuthenticationEntryPoint()))
-                .addFilter(this.defaultAuthenticationFilter());
+                .csrf(csrf->csrf.ignoringAntMatchers("/token").disable())
+                .formLogin(form->form.successHandler(this.defaultAuthenticationSuccessHandler()))
+                .exceptionHandling(exception->exception.authenticationEntryPoint(this.defaultAuthenticationEntryPoint()));
         return http.build();
     }
 
@@ -87,7 +85,7 @@ public class DefaultSecurityConfig {
      * Description:
      * </p>
      *
-     * @return com.hodgepodge.ums.auth.config.DefaultAuthenticationEntryPoint
+     * @return com.hodgepodge.ums.auth.entrypoint.DefaultAuthenticationEntryPoint
      * @author 刘小杰
      * @date 2022年01月26日
      * @since 1.8
@@ -99,19 +97,19 @@ public class DefaultSecurityConfig {
 
     /**
      * <p>
-     * Title: 往容器注入默认的认证过滤器
+     * Title: 注入默认的认证成功处理器
      * </p>
      * <p>
      * Description:
      * </p>
      *
-     * @return com.hodgepodge.ums.auth.filter.DefaultAuthenticationFilter
+     * @return com.hodgepodge.ums.auth.handler.DefaultAuthenticationSuccessHandler
      * @author 刘小杰
      * @date 2022年01月26日
      * @since 1.8
      */
     @Bean
-    public DefaultAuthenticationFilter defaultAuthenticationFilter(){
-        return new DefaultAuthenticationFilter(DEFAULT_FILTER_PROCESS_URL);
+    public DefaultAuthenticationSuccessHandler defaultAuthenticationSuccessHandler(){
+        return new DefaultAuthenticationSuccessHandler();
     }
 }

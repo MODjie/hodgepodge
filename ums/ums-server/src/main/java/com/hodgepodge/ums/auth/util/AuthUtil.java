@@ -12,7 +12,7 @@ package com.hodgepodge.ums.auth.util;
  * @date 2022年01月26日
  * @since 1.8
  */
-public class JWTUtil {
+public class AuthUtil {
 
     public static final String TOKEN_KEY_PREFIX = "token-";
 

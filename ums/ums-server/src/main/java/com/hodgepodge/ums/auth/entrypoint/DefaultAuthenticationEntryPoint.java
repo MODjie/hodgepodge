@@ -1,5 +1,7 @@
-package com.hodgepodge.ums.auth.config;
+package com.hodgepodge.ums.auth.entrypoint;
 
+import com.hodgepodge.exception.Return;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -25,6 +27,9 @@ public class DefaultAuthenticationEntryPoint implements AuthenticationEntryPoint
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        if (authException instanceof InsufficientAuthenticationException){
+            throw Return.client().unauthorized("用户名或密码错误").build();
+        }
         throw authException;
     }
 }

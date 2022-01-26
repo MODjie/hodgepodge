@@ -33,7 +33,7 @@ public class CustomUserDetailsService  implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UserDO user = userService.lambdaQuery().eq(UserDO::getUsername, username).one();
+        UserDO user = userService.getOneByUsername(username);
         if (user == null){
             throw new UsernameNotFoundException("未找到用户："+username);
         }

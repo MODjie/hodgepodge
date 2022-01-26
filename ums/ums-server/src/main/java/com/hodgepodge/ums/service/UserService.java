@@ -11,4 +11,19 @@ import com.hodgepodge.ums.entity.UserDO;
  */
 public interface UserService extends IService<UserDO> {
 
+    /**
+     * <p>
+     * Title: 根据用户名获取用户
+     * </p>
+     * <p>
+     * Description:
+     * </p>
+     *
+     * @param username
+     * @return com.hodgepodge.ums.entity.UserDO
+     * @author 刘小杰
+     * @date 2022年01月26日
+     * @since 1.8
+     */
+    UserDO getOneByUsername(String username);
 }

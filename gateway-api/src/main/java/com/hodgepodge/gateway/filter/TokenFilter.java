@@ -45,18 +45,18 @@ public class TokenFilter implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        //验证是否传入token
-        String token = request.getHeaders().getFirst(TOKEN);
-        token = StringUtils.hasText(token) ? token : request.getHeaders().getFirst(AUTHORIZATION);
-        if (!StringUtils.hasText(token)) {
-            throw Return.client().unauthorized("未传入token").build();
-        }
         //白名单直接放行
         if (!CollectionUtils.isEmpty(customGatewayProperties.getWhiteList())) {
             String path = request.getPath().value();
             if (customGatewayProperties.getWhiteList().contains(path)) {
                 return chain.filter(exchange);
             }
+        }
+        //验证是否传入token
+        String token = request.getHeaders().getFirst(TOKEN);
+        token = StringUtils.hasText(token) ? token : request.getHeaders().getFirst(AUTHORIZATION);
+        if (!StringUtils.hasText(token)) {
+            throw Return.client().unauthorized("请先登录").build();
         }
         //校验token是否正确
         if (!this.validateToken(token)) {
