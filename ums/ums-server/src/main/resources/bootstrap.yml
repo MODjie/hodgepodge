@@ -1,0 +1,15 @@
+nacos:
+  server-addr: http://124.71.32.209:8848
+  namespace: hodgepodge-dev
+spring:
+  application:
+    name: ums-server
+  cloud:
+    nacos:
+      config:
+        server-addr: ${nacos.server-addr}
+        file-extension: yaml
+        namespace: ${nacos.namespace}
+      discovery:
+        server-addr: ${nacos.server-addr}
+        namespace: ${nacos.namespace}

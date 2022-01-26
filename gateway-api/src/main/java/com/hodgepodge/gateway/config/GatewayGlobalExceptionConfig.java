@@ -3,7 +3,6 @@ package com.hodgepodge.gateway.config;
 import com.hodgepodge.gateway.exception.GatewayErrorAttributes;
 import com.hodgepodge.gateway.exception.GatewayGlobalExceptionHandler;
 import com.hodgepodge.gateway.exception.GatewayGlobalExceptionHandlerAdapter;
-import javassist.bytecode.ExceptionsAttribute;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.web.ServerProperties;

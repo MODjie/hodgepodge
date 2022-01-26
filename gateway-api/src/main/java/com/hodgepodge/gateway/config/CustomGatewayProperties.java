@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * <p>
- * Title: CustomGatewayProperties
+ * Title: 自定义网关属性
  * </p>
  * <p>
  * Description:
