@@ -1,5 +1,6 @@
 package com.hodgepodge.order.controller;
 
+import com.hodgepodge.exception.Return;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ public class HelloController {
     @ApiOperation("hello order")
     @GetMapping
     public String hello(){
-        return "hello order";
+        throw Return.server().msg("内部服务器异常").build();
     }
 
 }

@@ -3,7 +3,7 @@ nacos:
   namespace: hodgepodge-dev
 spring:
   application:
-    name: order
+    name: ums-server
   cloud:
     nacos:
       config:

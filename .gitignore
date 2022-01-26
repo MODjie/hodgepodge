@@ -1,0 +1,17 @@
+/ums/target/
+/common/target/
+/gateway-api/target/
+/order/target/
+/common/common-core/target/
+/common/common-core-api/target/
+/hodgepodge.iml
+/ums/ums.iml
+/ums/ums-server/ums-server.iml
+/ums/ums-api/ums-api.iml
+/order/order.iml
+/gateway-api/gateway-api.iml
+/common/common.iml
+/common/common-core/common-core.iml
+/common/common-core-api/common-core-api.iml
+/ums/ums-server/target/
+/ums/ums-api/target/
