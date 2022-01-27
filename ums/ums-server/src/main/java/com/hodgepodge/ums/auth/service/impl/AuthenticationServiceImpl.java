@@ -4,6 +4,8 @@ import cn.hutool.jwt.JWT;
 import com.hodgepodge.ums.auth.service.AuthenticationService;
 import com.hodgepodge.ums.auth.util.AuthUtil;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -55,6 +57,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (!cacheToken.equals(token)){
             return false;
         }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return true;
     }
 }

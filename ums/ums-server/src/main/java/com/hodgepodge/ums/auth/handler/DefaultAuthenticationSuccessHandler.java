@@ -15,6 +15,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -45,7 +46,7 @@ public class DefaultAuthenticationSuccessHandler implements AuthenticationSucces
         //将token存入redis，并设置过期时间
         Long userId = details.getUserId();
         String username = details.getUsername();
-        redisTemplate.opsForValue().set(AuthUtil.getTokenKeyInRedis(userId,username),token.getToken(),token.getEffectiveTime(), TimeUnit.MILLISECONDS);
+        redisTemplate.opsForValue().set(AuthUtil.getTokenKeyInRedis(userId,username),token.getToken(), Duration.ofMillis(token.getEffectiveTime()));
         //将生成的token输出到响应的body中
         String body = JSONUtil.toJsonStr(token);
         ServletOutputStream outputStream = response.getOutputStream();

@@ -1,7 +1,10 @@
 package com.hodgepodge.ums.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hodgepodge.ums.auth.entity.UserAuthority;
 import com.hodgepodge.ums.entity.UserDO;
+
+import java.util.List;
 
 /**
  * 用户表服务接口
@@ -26,4 +29,20 @@ public interface UserService extends IService<UserDO> {
      * @since 1.8
      */
     UserDO getOneByUsername(String username);
+
+    /**
+     * <p>
+     * Title: 获取用户权限
+     * </p>
+     * <p>
+     * Description:
+     * </p>
+     *
+     * @param userId 用户ID
+     * @return java.util.List<com.hodgepodge.ums.auth.entity.UserAuthority>
+     * @author 刘小杰
+     * @date 2022年01月27日
+     * @since 1.8
+     */
+    List<UserAuthority> selectUserAuthorities(Long userId);
 }

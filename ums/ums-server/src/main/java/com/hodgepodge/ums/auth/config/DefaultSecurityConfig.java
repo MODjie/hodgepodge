@@ -2,15 +2,24 @@ package com.hodgepodge.ums.auth.config;
 
 import com.hodgepodge.ums.auth.entrypoint.DefaultAuthenticationEntryPoint;
 import com.hodgepodge.ums.auth.handler.DefaultAuthenticationSuccessHandler;
+import com.hodgepodge.ums.auth.handler.DefaultAuthorizationManager;
 import com.hodgepodge.ums.auth.service.CustomUserDetailsService;
 import com.hodgepodge.ums.auth.util.Md5Encoder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authorization.AuthorityAuthorizationManager;
+import org.springframework.security.authorization.AuthorizationManager;
+import org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.AuthorizationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -25,18 +34,21 @@ import org.springframework.security.web.SecurityFilterChain;
  * @since 1.8
  */
 @EnableWebSecurity
+//@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true, jsr250Enabled = true)
 public class DefaultSecurityConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(authorizeRequests ->
-                                authorizeRequests
-                                        .anyRequest().permitAll()
+                        authorizeRequests
+                                .antMatchers("/internal-auth/**").permitAll()
+                                .anyRequest().authenticated()
                 )
-                .csrf(csrf->csrf.ignoringAntMatchers("/token").disable())
-                .formLogin(form->form.successHandler(this.defaultAuthenticationSuccessHandler()))
-                .exceptionHandling(exception->exception.authenticationEntryPoint(this.defaultAuthenticationEntryPoint()));
+                .csrf(csrf -> csrf.ignoringAntMatchers("/token").disable())
+                .formLogin(form -> form.successHandler(this.defaultAuthenticationSuccessHandler()))
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(this.defaultAuthenticationEntryPoint()));
+//                .addFilterAfter(this.authorizationFilter(),UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -73,7 +85,7 @@ public class DefaultSecurityConfig {
      */
     @ConditionalOnMissingBean
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new Md5Encoder();
     }
 
@@ -91,7 +103,7 @@ public class DefaultSecurityConfig {
      * @since 1.8
      */
     @Bean
-    public DefaultAuthenticationEntryPoint defaultAuthenticationEntryPoint(){
+    public DefaultAuthenticationEntryPoint defaultAuthenticationEntryPoint() {
         return new DefaultAuthenticationEntryPoint();
     }
 
@@ -109,7 +121,13 @@ public class DefaultSecurityConfig {
      * @since 1.8
      */
     @Bean
-    public DefaultAuthenticationSuccessHandler defaultAuthenticationSuccessHandler(){
+    public DefaultAuthenticationSuccessHandler defaultAuthenticationSuccessHandler() {
         return new DefaultAuthenticationSuccessHandler();
     }
+
+//    @Bean
+//    public AuthorizationFilter authorizationFilter(){
+//        AuthorizationManager<HttpServletRequest> authorizationManager = new DefaultAuthorizationManager<>();
+//        return new AuthorizationFilter(authorizationManager);
+//    }
 }

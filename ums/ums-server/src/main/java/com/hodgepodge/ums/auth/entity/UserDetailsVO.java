@@ -1,17 +1,15 @@
 package com.hodgepodge.ums.auth.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 /**
  * <p>
- * Title: UserDetailsVO
+ * Title: 用户详细信息
  * </p>
  * <p>
  * Description:
