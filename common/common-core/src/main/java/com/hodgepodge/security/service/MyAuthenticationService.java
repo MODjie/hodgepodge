@@ -1,6 +1,4 @@
-package com.hodgepodge.ums.auth.service;
-
-import com.hodgepodge.ums.auth.entity.TokenVO;
+package com.hodgepodge.security.service;
 
 /**
  * <p>
@@ -14,7 +12,7 @@ import com.hodgepodge.ums.auth.entity.TokenVO;
  * @date 2022年01月25日
  * @since 1.8
  */
-public interface AuthenticationService {
+public interface MyAuthenticationService {
     /**
      * <p>
      * Title: 校验token令牌

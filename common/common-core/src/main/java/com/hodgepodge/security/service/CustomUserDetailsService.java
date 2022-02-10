@@ -1,17 +1,18 @@
-package com.hodgepodge.ums.auth.service;
+package com.hodgepodge.security.service;
 
-import com.hodgepodge.ums.auth.entity.UserAuthority;
-import com.hodgepodge.ums.auth.entity.UserDetailsVO;
-import com.hodgepodge.ums.entity.UserDO;
-import com.hodgepodge.ums.service.UserService;
+import com.hodgepodge.security.entity.UserAuthority;
+import com.hodgepodge.security.entity.UserDO;
+import com.hodgepodge.security.entity.UserDetailsVO;
+import com.hodgepodge.security.service.impl.IUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import javax.annotation.Resource;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -27,13 +28,16 @@ import java.util.stream.Collectors;
  */
 public class CustomUserDetailsService  implements UserDetailsService {
 
+//    private final IUserService iUserService = new IUserServiceImpl();
+
+    @Qualifier("iUserService")
     @Autowired
-    private UserService userService;
+    private IUserService iUserService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UserDO user = userService.getOneByUsername(username);
+        UserDO user = iUserService.getOneByUsername(username);
         if (user == null){
             throw new UsernameNotFoundException("未找到用户："+username);
         }
@@ -57,6 +61,6 @@ public class CustomUserDetailsService  implements UserDetailsService {
      * @since 1.8
      */
     protected List<UserAuthority> loadUserAuthorities(Long userId) {
-        return userService.selectUserAuthorities(userId);
+        return iUserService.selectUserAuthorities(userId);
     }
 }

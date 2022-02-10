@@ -1,11 +1,10 @@
-package com.hodgepodge.ums.auth.service.impl;
+package com.hodgepodge.security.service.impl;
 
 import cn.hutool.jwt.JWT;
-import com.hodgepodge.ums.auth.service.AuthenticationService;
-import com.hodgepodge.ums.auth.util.AuthUtil;
+import com.hodgepodge.security.service.MyAuthenticationService;
+import com.hodgepodge.security.util.AuthUtil;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -23,8 +22,7 @@ import javax.annotation.Resource;
  * @date 2022年01月25日
  * @since 1.8
  */
-@Service
-public class AuthenticationServiceImpl implements AuthenticationService {
+public class MyAuthenticationServiceImpl implements MyAuthenticationService {
 
     @Resource
     private RedisTemplate redisTemplate;
@@ -57,7 +55,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (!cacheToken.equals(token)){
             return false;
         }
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return true;
     }
 }

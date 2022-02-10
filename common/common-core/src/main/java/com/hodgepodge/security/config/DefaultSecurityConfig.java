@@ -1,25 +1,21 @@
-package com.hodgepodge.ums.auth.config;
+package com.hodgepodge.security.config;
 
-import com.hodgepodge.ums.auth.entrypoint.DefaultAuthenticationEntryPoint;
-import com.hodgepodge.ums.auth.handler.DefaultAuthenticationSuccessHandler;
-import com.hodgepodge.ums.auth.handler.DefaultAuthorizationManager;
-import com.hodgepodge.ums.auth.service.CustomUserDetailsService;
-import com.hodgepodge.ums.auth.util.Md5Encoder;
+import com.hodgepodge.security.entrypoint.DefaultAuthenticationEntryPoint;
+import com.hodgepodge.security.handler.DefaultAuthenticationSuccessHandler;
+import com.hodgepodge.security.service.CustomUserDetailsService;
+import com.hodgepodge.security.service.MyAuthenticationService;
+import com.hodgepodge.security.service.impl.MyAuthenticationServiceImpl;
+import com.hodgepodge.security.util.Md5Encoder;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authorization.AuthorityAuthorizationManager;
-import org.springframework.security.authorization.AuthorizationManager;
-import org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.intercept.AuthorizationFilter;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -34,7 +30,9 @@ import javax.servlet.http.HttpServletRequest;
  * @since 1.8
  */
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true, jsr250Enabled = true)
+@ComponentScan("com.hodgepodge.security.**")
+@MapperScan("com.hodgepodge.**")
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true, jsr250Enabled = true)
 public class DefaultSecurityConfig {
 
     @Bean
@@ -48,7 +46,6 @@ public class DefaultSecurityConfig {
                 .csrf(csrf -> csrf.ignoringAntMatchers("/token").disable())
                 .formLogin(form -> form.successHandler(this.defaultAuthenticationSuccessHandler()))
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(this.defaultAuthenticationEntryPoint()));
-//                .addFilterAfter(this.authorizationFilter(),UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -125,9 +122,8 @@ public class DefaultSecurityConfig {
         return new DefaultAuthenticationSuccessHandler();
     }
 
-//    @Bean
-//    public AuthorizationFilter authorizationFilter(){
-//        AuthorizationManager<HttpServletRequest> authorizationManager = new DefaultAuthorizationManager<>();
-//        return new AuthorizationFilter(authorizationManager);
-//    }
+    @Bean
+    public MyAuthenticationService myAuthenticationService(){
+        return new MyAuthenticationServiceImpl();
+    }
 }

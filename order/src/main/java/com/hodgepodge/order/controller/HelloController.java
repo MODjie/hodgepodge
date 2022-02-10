@@ -3,6 +3,9 @@ package com.hodgepodge.order.controller;
 import com.hodgepodge.exception.Return;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +24,10 @@ public class HelloController {
 
     @ApiOperation("hello order")
     @GetMapping
+//    @PostAuthorize("hasAuthority('user:view')")
     public String hello(){
-        throw Return.server().msg("内部服务器异常").build();
+        SecurityContextHolder.getContext().getAuthentication();
+        throw Return.server().msg("测试测试").build();
     }
 
 }

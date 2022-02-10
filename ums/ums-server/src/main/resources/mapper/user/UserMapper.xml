@@ -2,15 +2,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hodgepodge.ums.mapper.UserMapper">
 
-    <select id="selectUserAuthorities" resultType="com.hodgepodge.ums.auth.entity.UserAuthority">
-        select urpn.id as permissionId,
-               urpn.value as permission
-        from ums_user uu
-                 inner join ums_user_role_relation uurr on uurr.user_id = uu.id
-                 inner join ums_role ur on ur.id = uurr.role_id
-                 inner join ums_role_permission urp on urp.role_id = ur.id
-                 inner join ums_resource_permission urpn on urpn.id = urp.permission_id
-    </select>
-
 
 </mapper>

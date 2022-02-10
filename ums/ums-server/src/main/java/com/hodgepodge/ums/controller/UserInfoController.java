@@ -25,7 +25,7 @@ public class UserInfoController {
     @Resource
     private UserInfoService userInfoService;
 
-//    @PreAuthorize("hasAuthority('user:view')")
+    @PreAuthorize("hasAuthority('user:view')")
     @GetMapping("/hello")
     public String hello(){
         return "hello";

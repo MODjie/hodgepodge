@@ -1,10 +1,9 @@
-package com.hodgepodge.ums.auth.entrypoint;
+package com.hodgepodge.security.entrypoint;
 
 import com.hodgepodge.exception.Return;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

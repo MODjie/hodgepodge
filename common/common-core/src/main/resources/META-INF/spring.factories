@@ -1,0 +1,22 @@
+# Initializers
+org.springframework.context.ApplicationContextInitializer=\
+
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+
+# Auto Configuration Import Listeners
+org.springframework.boot.autoconfigure.AutoConfigurationImportListener=\
+
+# Auto Configuration Import Filters
+org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
+
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.hodgepodge.exception.config.GlobalExceptionConfig,\
+  com.hodgepodge.security.config.DefaultSecurityConfig
+
+# Failure analyzers
+org.springframework.boot.diagnostics.FailureAnalyzer=\
+
+# Template availability providers
+org.springframework.boot.autoconfigure.template.TemplateAvailabilityProvider=\

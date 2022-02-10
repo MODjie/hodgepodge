@@ -1,12 +1,13 @@
-package com.hodgepodge.ums.auth.handler;
+package com.hodgepodge.security.handler;
 
 import cn.hutool.json.JSONUtil;
 import cn.hutool.jwt.JWTUtil;
-import com.hodgepodge.ums.auth.entity.TokenVO;
-import com.hodgepodge.ums.auth.entity.UserDetailsVO;
-import com.hodgepodge.ums.auth.util.AuthUtil;
+import com.hodgepodge.security.entity.TokenVO;
+import com.hodgepodge.security.entity.UserDetailsVO;
+import com.hodgepodge.security.util.AuthUtil;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.annotation.Resource;
@@ -18,7 +19,6 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * <p>

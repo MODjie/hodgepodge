@@ -1,4 +1,4 @@
-package com.hodgepodge.ums.config;
+package com.hodgepodge.security.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @date 2022年01月27日
  * @since 1.8
  */
-//@Configuration
+@Configuration
 public class RedisConfig {
 
     @Resource

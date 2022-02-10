@@ -1,7 +1,7 @@
-package com.hodgepodge.ums.auth.controller;
+package com.hodgepodge.security.controller;
 
-import com.hodgepodge.ums.auth.service.AuthenticationService;
-import io.swagger.annotations.ApiOperation;
+import com.hodgepodge.security.service.MyAuthenticationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,8 +26,8 @@ import javax.annotation.Resource;
 @RequestMapping("/internal-auth")
 public class InternalAuthenticationController {
 
-    @Resource
-    private AuthenticationService authenticationService;
+    @Autowired
+    private MyAuthenticationService myAuthenticationService;
 
     /**
      * <p>
@@ -45,7 +45,7 @@ public class InternalAuthenticationController {
      */
     @GetMapping("/validateToken")
     public Boolean validateToken(@RequestParam("token") String token) {
-        return authenticationService.validateToken(token);
+        return myAuthenticationService.validateToken(token);
     }
 
 }

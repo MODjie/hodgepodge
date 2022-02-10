@@ -1,4 +1,4 @@
-package com.hodgepodge.ums.auth.entity;
+package com.hodgepodge.security.entity;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

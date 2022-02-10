@@ -1,7 +1,6 @@
 package com.hodgepodge.ums.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hodgepodge.ums.auth.entity.UserAuthority;
 import com.hodgepodge.ums.entity.UserDO;
 import com.hodgepodge.ums.mapper.UserMapper;
 import com.hodgepodge.ums.service.UserService;
@@ -21,10 +20,5 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     @Override
     public UserDO getOneByUsername(String username) {
         return this.lambdaQuery().eq(UserDO::getUsername, username).one();
-    }
-
-    @Override
-    public List<UserAuthority> selectUserAuthorities(Long userId) {
-        return this.getBaseMapper().selectUserAuthorities(userId);
     }
 }
